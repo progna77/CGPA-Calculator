@@ -1,1 +1,1 @@
-# HI, this is a very simple and minimal CGPA calculator. It helps students calculate their current semester GPA and updated overall CGPA easily. I have used Python and Streamlit for this and also planning on making further changes in the frontend later on. Hope this helps! 
+# HI, this is a very simple and minimal CGPA calculator. It helps students calculate their current semester GPA and updated overall CGPA easily. I have used Python and Streamlit for this and also planning on making further changes in the frontend. Hope this helps! 
