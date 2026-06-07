@@ -1,0 +1,83 @@
+import streamlit as st
+
+st.set_page_config(page_title="CGPA CALCULATOR", page_icon="📚", layout="centered")
+
+st.title("📚 CGPA CALCULATOR")
+st.write("Calculate semester GPA and updated overall CGPA.")
+
+st.divider()
+
+cur = st.number_input(
+    "Current CGPA",
+    min_value=0.0,
+    max_value=4.0,
+    step=0.01
+)
+
+comCre = st.number_input(
+    "Completed Credits before this semester",
+    min_value=0,
+    step=1
+)
+
+st.markdown("### Number of Courses this Semester")
+st.caption("Enter how many courses you took this semester")
+
+num = st.number_input(
+    "",
+    min_value=1,
+    step=1,
+    label_visibility="collapsed"
+)
+
+st.divider()
+
+courses = []
+
+for i in range(int(num)):
+    st.markdown(f"### 📖 Course {i+1}")
+
+    course = st.text_input(
+        "Course Name (Optional)",
+        key=f"course{i}"
+    )
+
+    credit = st.number_input(
+        "Credit",
+        min_value=1,
+        step=1,
+        key=f"credit{i}"
+    )
+
+    gpa = st.number_input(
+        "GPA",
+        min_value=0.0,
+        max_value=4.0,
+        step=0.01,
+        key=f"gpa{i}"
+    )
+
+    courses.append((course, credit, gpa))
+
+st.divider()
+
+if st.button("Calculate CGPA"):
+
+    old = cur * comCre
+
+    numer = 0.0
+    tot_cre = 0.0
+    cc = {}
+
+    for course, credit, gpa in courses:
+        cc[course] = {"gpa": gpa}
+        numer += (gpa * credit)
+        tot_cre += credit
+
+    cgpa = (numer) / tot_cre
+
+    st.success(f"CGPA of this semester: {cgpa:.2f}")
+
+    new_cgpa = (old + numer) / (comCre + tot_cre)
+
+    st.info(f"Updated Overall CGPA: {new_cgpa:.2f}")
